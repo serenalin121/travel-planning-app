@@ -8,5 +8,10 @@
   </head>
   <body>
     <h1>All Trips</h1>
+    <ul>
+      <% trips.forEach(trip=>{ %>
+      <li><a href="/trips/<%= trip._id %>"> <%= trip.name %> </a></li>
+      <% }) %>
+    </ul>
   </body>
 </html>

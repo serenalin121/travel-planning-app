@@ -3,7 +3,9 @@ const router = express.Router();
 const Trip = require("../models/trip");
 
 router.get("/", (req, res) => {
-  res.render("trips/index.ejs");
+  Trip.find({}, (err, allTrips) => {
+    res.render("trips/index.ejs", { trips: allTrips });
+  });
 });
 
 module.exports = router;
