@@ -21,6 +21,31 @@ router.post("/", (req, res) => {
     res.send(err.message);
   }
 });
+
+router.get("/:id", (req, res) => {
+  try {
+    Trip.findById(req.params.id, (err, foundTrip) => {
+      err ? res.send(err) : res.render("trips/show.ejs", { trip: foundTrip });
+    });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  try {
+    Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.redirect("/trips");
+      }
+    });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 // Seed Data
 router.get("/seed", async (req, res) => {
   const newTrips = [
