@@ -17,5 +17,8 @@
       <li><%= activity %></li>
       <% }) %>
     </ul>
+    <form action="/trips/<%= trip._id %>?_method=DELETE" method="POST">
+      <button>Delete</button>
+    </form>
   </body>
 </html>
