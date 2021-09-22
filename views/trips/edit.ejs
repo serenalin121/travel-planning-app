@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>Travel Planning</title>
+  </head>
+  <body>
+    <h1>Edit trip</h1>
+    <div class="row">
+      <form action="/trips" method="POST" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input
+              id="name"
+              type="text"
+              class="validate"
+              name="name"
+              value="<%= trip.name %> "
+              required
+            />
+            <label for="name">Trip Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s4">
+            <input
+              id="duration"
+              type="text"
+              class="validate"
+              name="duration"
+              value="<%= trip.duration %> "
+              required
+            />
+            <label for="duration">Trip Duration (day)</label>
+          </div>
+          <div class="input-field col s8">
+            <input
+              id="destination"
+              type="text"
+              class="validate"
+              name="destination"
+              value="<%= trip.destination %> "
+              required
+            />
+            <label for="destination">Trip Destination</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea
+              id="itinerary"
+              class="materialize-textarea"
+              name="itinerary"
+            >
+<%= trip.itinerary.join(", ") %></textarea
+            >
+            <label for="itinerary">Itinerary</label>
+          </div>
+        </div>
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

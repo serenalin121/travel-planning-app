@@ -8,6 +8,7 @@
   </head>
   <body>
     <h1><%= trip.name %></h1>
+    <a href="/trips/<%= trip._id %>/edit">Edit</a>
     <h2>
       <%= trip.destination %> - <%= trip.duration %> <%= trip.duration ===1?
       "Day": "Days" %>
