@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1><%= trip.name %></h1>
-    <a href="/trips/<%= trip._id %>/edit">Edit</a>
-    <h2>
-      <%= trip.destination %> - <%= trip.duration %> <%= trip.duration ===1?
-      "Day": "Days" %>
-    </h2>
-    <ul>
-      <% trip.itinerary.forEach((activity)=>{ %>
-      <li><%= activity %></li>
-      <% }) %>
-    </ul>
-    <form action="/trips/<%= trip._id %>?_method=DELETE" method="POST">
-      <button>Delete</button>
-    </form>
-  </body>
-</html>
+<%- include("../partials/header.ejs") %>
+<h1><%= trip.name %></h1>
+<a href="/trips/<%= trip._id %>/edit">Edit</a>
+<h2>
+  <%= trip.destination %> - <%= trip.duration %> <%= trip.duration ===1? "Day":
+  "Days" %>
+</h2>
+<ul>
+  <% trip.itinerary.forEach((activity)=>{ %>
+  <li><%= activity %></li>
+  <% }) %>
+</ul>
+<form action="/trips/<%= trip._id %>?_method=DELETE" method="POST">
+  <button>Delete</button>
+</form>
+<%- include("../partials/footer.ejs") %>
