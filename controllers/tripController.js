@@ -83,11 +83,7 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   try {
     Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.redirect("/trips");
-      }
+      err ? res.send(err) : res.redirect("/trips");
     });
   } catch (err) {
     res.send(err.message);
@@ -97,11 +93,18 @@ router.delete("/:id", (req, res) => {
 router.get("/:id/edit", (req, res) => {
   try {
     Trip.findById(req.params.id, (err, foundTrip) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.render("trips/edit.ejs", { trip: foundTrip });
-      }
+      err ? res.send(err) : res.render("trips/edit.ejs", { trip: foundTrip });
+    });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  try {
+    Trip.findByIdAndUpdate(id, req.body, (err, updatedTrip) => {
+      err ? res.send(err) : res.redirect(`/trips/${id}`);
     });
   } catch (err) {
     res.send(err.message);

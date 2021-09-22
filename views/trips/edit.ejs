@@ -18,7 +18,11 @@
   <body>
     <h1>Edit trip</h1>
     <div class="row">
-      <form action="/trips" method="POST" class="col s12">
+      <form
+        action="/trips/<%= trip._id %>?_method=PUT"
+        method="POST"
+        class="col s12"
+      >
         <div class="row">
           <div class="input-field col s12">
             <input
