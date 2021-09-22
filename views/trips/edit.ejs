@@ -23,10 +23,11 @@
       <div class="input-field col s4">
         <input
           id="duration"
-          type="text"
+          type="number"
           class="validate"
+          min="1"
           name="duration"
-          value="<%= trip.duration %> "
+          value="<%= +(trip.duration) %>"
           required
         />
         <label for="duration">Trip Duration (day)</label>
@@ -37,7 +38,7 @@
           type="text"
           class="validate"
           name="destination"
-          value="<%= trip.destination %> "
+          value="<%= trip.destination %>"
           required
         />
         <label for="destination">Trip Destination</label>
