@@ -4,6 +4,15 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+h1 {
+  text-align: center;
+  color: #00695c;
+}
+
+h3 {
+  text-align: center;
+}
+
 nav .nav-wrapper {
   margin-left: 20px;
   margin-right: 20px;
@@ -19,4 +28,18 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+.newTripForm,
+.editTripForm {
+  margin: 50px;
+}
+
+.showPageCard {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.showPageItinerary {
+  margin-left: 50px;
 }

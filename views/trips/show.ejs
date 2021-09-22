@@ -1,16 +1,33 @@
 <%- include("../partials/header.ejs") %>
-<h1><%= trip.name %></h1>
-<a href="/trips/<%= trip._id %>/edit">Edit</a>
-<h2>
-  <%= trip.destination %> - <%= trip.duration %> <%= trip.duration ===1? "Day":
-  "Days" %>
-</h2>
-<ul>
-  <% trip.itinerary.forEach((activity)=>{ %>
-  <li><%= activity %></li>
-  <% }) %>
-</ul>
+<h1>
+  <%= trip.name %>
+  <a href="/trips/<%= trip._id %>/edit" class="waves-effect waves-light btn"
+    ><i class="material-icons right">edit</i>Edit</a
+  >
+</h1>
+
+<h3>
+  Destination: <%= trip.destination %> - <%= trip.duration %> <%= trip.duration
+  ===1? "Day": "Days" %>
+</h3>
+
+<div class="showPageItinerary row">
+  <ul class="collection with-header col s12 m6">
+    <li class="collection-header"><h4>Itinerary</h4></li>
+    <% trip.itinerary.forEach((activity)=>{ %>
+    <li class="collection-item"><%= activity %></li>
+    <% }) %>
+  </ul>
+</div>
+
 <form action="/trips/<%= trip._id %>?_method=DELETE" method="POST">
-  <button>Delete</button>
+  <button
+    class="deep-orange btn waves-effect waves-light right"
+    type="submit"
+    name="action"
+  >
+    Delete
+    <i class="material-icons right">delete</i>
+  </button>
 </form>
 <%- include("../partials/footer.ejs") %>
