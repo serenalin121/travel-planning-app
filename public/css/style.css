@@ -19,7 +19,7 @@ nav .nav-wrapper {
 }
 
 nav ul a {
-  font-size: x-large;
+  font-size: large;
 }
 
 footer {
@@ -44,3 +44,6 @@ footer {
   margin-left: 50px;
 }
 
+.flash {
+  text-align: center;
+}

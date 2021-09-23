@@ -86,7 +86,10 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   try {
     Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
-      err ? res.send(err) : res.redirect("/trips");
+      err
+        ? res.send(err)
+        : (req.session.message = "Successfully deleted a trip!");
+      res.redirect("/trips");
     });
   } catch (err) {
     res.send(err.message);
@@ -107,7 +110,10 @@ router.put("/:id", (req, res) => {
   const { id } = req.params;
   try {
     Trip.findByIdAndUpdate(id, req.body, (err, updatedTrip) => {
-      err ? res.send(err) : res.redirect(`/trips/${id}`);
+      err
+        ? res.send(err)
+        : (req.session.message = "Successfully edited a trip!");
+      res.redirect(`/trips/${id}`);
     });
   } catch (err) {
     res.send(err.message);
