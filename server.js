@@ -60,6 +60,9 @@ app.get("/", (req, res) => {
 const tripsController = require("./controllers/tripController");
 app.use("/trips", tripsController);
 
+const userController = require("./controllers/userController");
+app.use("/users", userController);
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
