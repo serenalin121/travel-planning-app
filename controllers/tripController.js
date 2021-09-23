@@ -16,7 +16,9 @@ router.post("/", (req, res) => {
   req.body.itinerary = req.body.itinerary.split(",");
   try {
     Trip.create(req.body, (err, createdTrip) => {
-      err ? res.send(err) : (req.session.message = "successfully posted");
+      err
+        ? res.send(err)
+        : (req.session.message = "Successfully created a new trip!");
       res.redirect(`/trips/${createdTrip._id}`);
     });
   } catch (err) {
