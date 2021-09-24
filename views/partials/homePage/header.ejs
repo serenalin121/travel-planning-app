@@ -22,3 +22,16 @@
       </div>
     </nav>
 
+    <script>
+      setTimeout(() => {
+        window.document.querySelector(".home-flash").style.display = "none";
+      }, 2000);
+    </script>
+    <% if(message){ %>
+
+    <h6 class="white-text card-panel red lighten-2 home-flash">
+      <%= message %>
+    </h6>
+
+    <% } %>
+

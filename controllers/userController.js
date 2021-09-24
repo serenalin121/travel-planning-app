@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 router.get("/register", (req, res) => {
@@ -7,11 +8,12 @@ router.get("/register", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  const salt = bcrypt.genSaltSync(10);
+  const salt = bcrypt.genSaltSync(12);
   req.body.password = bcrypt.hashSync(req.body.password, salt);
   User.findOne({ username: req.body.username }, (err, userExists) => {
     if (userExists) {
-      res.send("That username is takend!");
+        req.session.message = "That username is takend!";
+        res.redirect("/users/signin");
     } else {
       User.create(req.body, (err, createdUser) => {
         req.session.currentUser = createdUser;
@@ -36,10 +38,12 @@ router.post("/signin", (req, res) => {
         req.session.currentUser = foundUser;
         res.redirect("/trips");
       } else {
-        res.send("Invalid username or password");
+        req.session.message = "Invalid username or password";
+        res.redirect("/users/signin");
       }
     } else {
-      res.send("Invalid username or password");
+      req.session.message = "Invalid username or password";
+      res.redirect("/users/signin");
     }
   });
 });
