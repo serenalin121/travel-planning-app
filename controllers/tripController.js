@@ -10,7 +10,7 @@ const requireLogin = (req, res, next) =>{
 }
 
 router.get("/", requireLogin, (req, res) => {
-  Trip.find({}, (err, allTrips) => {
+  Trip.find({author: req.session.currentUser._id }, (err, allTrips) => {
     res.render("trips/index.ejs", { trips: allTrips });
   });
 });
@@ -21,6 +21,7 @@ router.get("/new", requireLogin, (req, res) => {
 
 router.post("/", (req, res) => {
   req.body.itinerary = req.body.itinerary.split(",");
+  req.body.author = req.session.currentUser._id
   try {
     Trip.create(req.body, (err, createdTrip) => {
       err

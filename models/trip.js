@@ -7,6 +7,7 @@ const tripSchema = new Schema({
   duration: { type: Number, min: 0, required: true },
   destination: { type: String, required: true },
   itinerary: [String],
+  author: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = model("Trip", tripSchema);
