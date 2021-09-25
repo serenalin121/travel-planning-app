@@ -41,9 +41,20 @@ footer {
 }
 
 .showPageItinerary {
-  margin-left: 50px;
+  margin-top: 20px;
+  margin-left: 25%;
+  margin-right: 25%;
 }
 
 .trip-flash {
   text-align: center;
+}
+
+.showPageDeleteButton {
+  margin-right: 50px;
+}
+
+#map {
+  height: 500px;
+  width: 100%;
 }

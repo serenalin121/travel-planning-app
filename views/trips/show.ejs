@@ -1,4 +1,21 @@
 <%- include("../partials/header.ejs") %>
+<script>
+  // Initialize and add the map
+  function initMap() {
+    // The location of Uluru
+    const uluru = { lat: -25.344, lng: 131.036 };
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: uluru,
+    });
+    // The marker, positioned at Uluru
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map,
+    });
+  }
+</script>
 
 <h1>
   <%= trip.name %>
@@ -12,8 +29,10 @@
   ===1? "Day": "Days" %>
 </h3>
 
+<div id="map"></div>
+
 <div class="showPageItinerary row">
-  <ul class="collection with-header col s12 m6">
+  <ul class="collection with-header col s12 m12">
     <li class="collection-header"><h4>Itinerary</h4></li>
     <% trip.itinerary.forEach((activity)=>{ %>
     <li class="collection-item"><%= activity %></li>
@@ -23,7 +42,7 @@
 
 <form action="/trips/<%= trip._id %>?_method=DELETE" method="POST">
   <button
-    class="deep-orange btn waves-effect waves-light right"
+    class="deep-orange btn waves-effect waves-light right showPageDeleteButton"
     type="submit"
     name="action"
   >
@@ -31,4 +50,22 @@
     <i class="material-icons right">delete</i>
   </button>
 </form>
+
+<script>
+  mapboxgl.accessToken =
+    "pk.eyJ1Ijoic2VyZW5hbGluMTIxIiwiYSI6ImNrbXhwOWloNTA5MWMydm8xNTU1ZG9jMDYifQ.Bb1rXTr0n5JGHfE8Xv4Y2A";
+
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v11",
+    center: [<%= trip.destinationCoord.lat %> , <%= trip.destinationCoord.lng %>],
+    zoom: 8,
+  });
+
+  // Create a default Marker and add it to the map.
+  const marker1 = new mapboxgl.Marker()
+    .setLngLat([12.554729, 55.70651])
+    .addTo(map);
+</script>
+
 <%- include("../partials/footer.ejs") %>

@@ -2,15 +2,15 @@ const express = require("express");
 const router = express.Router();
 const Trip = require("../models/trip");
 
-const requireLogin = (req, res, next) =>{
-  if(!req.session.currentUser){
-    return res.redirect("/users/signin")
-  } 
-  next()
-}
+const requireLogin = (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect("/users/signin");
+  }
+  next();
+};
 
 router.get("/", requireLogin, (req, res) => {
-  Trip.find({author: req.session.currentUser._id }, (err, allTrips) => {
+  Trip.find({ author: req.session.currentUser._id }, (err, allTrips) => {
     res.render("trips/index.ejs", { trips: allTrips });
   });
 });
@@ -20,13 +20,18 @@ router.get("/new", requireLogin, (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  req.body.itinerary = req.body.itinerary.split(",");
-  req.body.author = req.session.currentUser._id
+  req.body.itinerary = req.body.itinerary.split(",").map((item) => item.trim());
+  req.body.author = req.session.currentUser._id;
+  req.body.destinationCoord = {
+    lat: 12.550343,
+    lng: 55.665957,
+  };
   try {
     Trip.create(req.body, (err, createdTrip) => {
       err
         ? res.send(err)
         : (req.session.message = "Successfully created a new trip!");
+      console.log(createdTrip);
       res.redirect(`/trips/${createdTrip._id}`);
     });
   } catch (err) {
@@ -115,6 +120,7 @@ router.get("/:id/edit", requireLogin, (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
+  req.body.itinerary = req.body.itinerary.split(",").map((item) => item.trim());
   const { id } = req.params;
   try {
     Trip.findByIdAndUpdate(id, req.body, (err, updatedTrip) => {
