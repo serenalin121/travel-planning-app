@@ -2,13 +2,20 @@ const express = require("express");
 const router = express.Router();
 const Trip = require("../models/trip");
 
-router.get("/", (req, res) => {
+const requireLogin = (req, res, next) =>{
+  if(!req.session.currentUser){
+    return res.redirect("/users/signin")
+  } 
+  next()
+}
+
+router.get("/", requireLogin, (req, res) => {
   Trip.find({}, (err, allTrips) => {
     res.render("trips/index.ejs", { trips: allTrips });
   });
 });
 
-router.get("/new", (req, res) => {
+router.get("/new", requireLogin, (req, res) => {
   res.render("trips/new.ejs");
 });
 
@@ -73,7 +80,7 @@ router.post("/", (req, res) => {
 //   }
 // });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", requireLogin, (req, res) => {
   try {
     Trip.findById(req.params.id, (err, foundTrip) => {
       err ? res.send(err) : res.render("trips/show.ejs", { trip: foundTrip });
@@ -96,7 +103,7 @@ router.delete("/:id", (req, res) => {
   }
 });
 
-router.get("/:id/edit", (req, res) => {
+router.get("/:id/edit", requireLogin, (req, res) => {
   try {
     Trip.findById(req.params.id, (err, foundTrip) => {
       err ? res.send(err) : res.render("trips/edit.ejs", { trip: foundTrip });

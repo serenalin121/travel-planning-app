@@ -52,9 +52,10 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Controllers
 app.get("/", (req, res) => {
-  res.render("home.ejs");
+  res.render("home.ejs", {currentUser: req.session.currentUser});
 });
 
 const tripsController = require("./controllers/tripController");
