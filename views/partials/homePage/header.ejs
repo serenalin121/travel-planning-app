@@ -15,20 +15,24 @@
     <nav class="transparent z-depth-0">
       <div class="nav-wrapper">
         <a href="/" class="brand-logo left"> Travel Planning</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down ">
-          <% if(typeof currentUser === "undefined"){ %> 
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if(typeof currentUser === "undefined"){ %>
           <li><a href="/users/signin">Sign In</a></li>
           <li><a href="/users/register">Register</a></li>
-          <% }else{ %> 
+          <% }else{ %>
           <li><a href="/users/signout">Sign Out</a></li>
-          <% } %> 
+          <% } %>
         </ul>
       </div>
     </nav>
 
     <script>
       setTimeout(() => {
-        window.document.querySelector(".home-flash").style.display = "none";
+        const homeFlash = window.document.querySelector(".home-flash");
+
+        if (homeFlash) {
+          homeFlash.style.display = "none";
+        }
       }, 2000);
     </script>
     <% if(message){ %>
@@ -38,4 +42,5 @@
     </h6>
 
     <% } %>
-
+  </body>
+</html>

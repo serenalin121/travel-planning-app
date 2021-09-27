@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const MapboxClient = require("mapbox");
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -52,10 +53,9 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // Controllers
 app.get("/", (req, res) => {
-  res.render("home.ejs", {currentUser: req.session.currentUser});
+  res.render("home.ejs", { currentUser: req.session.currentUser });
 });
 
 const tripsController = require("./controllers/tripController");

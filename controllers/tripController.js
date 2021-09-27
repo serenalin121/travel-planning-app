@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Trip = require("../models/trip");
 
+const MapboxClient = require("mapbox");
+const client = new MapboxClient(
+  "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw"
+);
+
 const requireLogin = (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect("/users/signin");
@@ -37,6 +42,29 @@ router.post("/", (req, res) => {
   } catch (err) {
     res.send(err.message);
   }
+});
+
+/* get autocomplete suggestions for places */
+router.get("/autocomplete", (req, res) => {
+  // Limit types of autocomplete result (e.g. no point of interest, postal code, etc.)
+  // https://docs.mapbox.com/api/search/geocoding/#data-types
+  const locationTypes = [
+    "country", // countries
+    "region", // top-level features (e.g. states in US)
+    "district", // Larger than cities < top-level
+    "place", // Cities, villages, etc.
+    "locality", // sub-city
+  ];
+
+  // https://docs.mapbox.com/api/search/geocoding/
+  const geocodeForwardOptions = {
+    autocomplete: true,
+    types: locationTypes,
+  };
+
+  client.geocodeForward(req.query.query, geocodeForwardOptions, (err, data) =>
+    res.send(data)
+  );
 });
 
 // Seed Data

@@ -40,12 +40,6 @@ footer {
   margin-right: 50px;
 }
 
-.showPageItinerary {
-  margin-top: 20px;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-
 .trip-flash {
   text-align: center;
 }
@@ -53,8 +47,18 @@ footer {
 .showPageDeleteButton {
   margin-right: 50px;
 }
+.showPageItinerary {
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.mapContainer {
+  display: flex;
+  justify-content: center;
+}
 
 #map {
-  height: 500px;
-  width: 100%;
+  height: 50vh;
+  width: 94vw;
+  margin-bottom: 20px;
 }

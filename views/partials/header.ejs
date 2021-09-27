@@ -12,11 +12,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css"
       rel="stylesheet"
     />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="/css/style.css" />
     <title>Travel Planning</title>
   </head>
@@ -36,7 +36,11 @@
 
     <script>
       setTimeout(() => {
-        window.document.querySelector(".trip-flash").style.display = "none";
+        const tripFlash = window.document.querySelector(".trip-flash");
+
+        if (tripFlash) {
+          tripFlash.style.display = "none";
+        }
       }, 2000);
     </script>
     <% if(message){ %>
@@ -46,4 +50,5 @@
     </h6>
 
     <% } %>
-
+  </body>
+</html>
