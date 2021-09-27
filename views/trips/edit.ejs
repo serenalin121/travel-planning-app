@@ -7,7 +7,7 @@
     class="col s12"
   >
     <div class="row">
-      <div class="input-field col s12">
+      <div class="input-field col s6">
         <input
           id="name"
           type="text"
@@ -18,32 +18,20 @@
         />
         <label for="name">Trip Name</label>
       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s4">
-        <input
-          id="duration"
-          type="number"
-          class="validate"
-          min="1"
-          name="duration"
-          value="<%= +(trip.duration) %>"
-          required
-        />
-        <label for="duration">Trip Duration (day)</label>
-      </div>
-      <div class="input-field col s8">
-        <input
-          id="destination"
-          type="text"
-          class="validate"
-          name="destination"
-          value="<%= trip.destination %>"
-          required
-        />
-        <label for="destination">Trip Destination</label>
+        <div class="input-field col s6">
+          <input
+            id="duration"
+            type="number"
+            class="validate"
+            min="1"
+            name="duration"
+            value="<%= +(trip.duration) %>"
+            required
+          />
+          <label for="duration">Trip Duration (day)</label>
       </div>
     </div>
+
     <div class="row">
       <div class="input-field col s12">
         <textarea id="itinerary" class="materialize-textarea" name="itinerary">
@@ -52,6 +40,27 @@
         <label for="itinerary">Itinerary</label>
       </div>
     </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <input
+              type="text"
+              id="autocomplete-input"
+              name="destination"
+              class="autocomplete"
+              value="<%= trip.destination %>"
+            />
+            <label for="autocomplete-input">Trip Destination</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mapContainer">
+      <div id="map"></div>
+    </div>
+
     <a href="/trips/<%= trip._id %>" class="waves-effect waves-light btn"
       >Cancel<i class="material-icons right">cancel</i></a
     >
@@ -65,4 +74,21 @@
     </button>
   </form>
 </div>
+
+<script>
+  const latitude = <%= trip.latitude %>;
+  const longitude = <%= trip.longitude %>;
+  // Set mapbox access token
+  mapboxgl.accessToken =
+    "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw";
+
+  // initialize mapbox instance
+  const map = new mapboxgl.Map({
+    container: "map", // HTML container id
+    style: "mapbox://styles/mapbox/streets-v9", // style URL
+    center: [latitude, longitude], // starting position as [lng, lat]
+    zoom: 13, // starting zoom level
+  });
+</script>
+<script src="/js/autocomplete.js"></script>
 <%- include("../partials/footer.ejs") %>

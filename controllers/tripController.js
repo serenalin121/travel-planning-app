@@ -27,10 +27,6 @@ router.get("/new", requireLogin, (req, res) => {
 router.post("/", (req, res) => {
   req.body.itinerary = req.body.itinerary.split(",").map((item) => item.trim());
   req.body.author = req.session.currentUser._id;
-  req.body.destinationCoord = {
-    lat: 12.550343,
-    lng: 55.665957,
-  };
   try {
     Trip.create(req.body, (err, createdTrip) => {
       err

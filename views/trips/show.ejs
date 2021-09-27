@@ -35,5 +35,19 @@
   </button>
 </form>
 
-<script src="/js/showMap.js"></script>
+<script>
+  const latitude = <%= trip.latitude %>;
+  const longitude = <%= trip.longitude %>;
+  // Set mapbox access token
+  mapboxgl.accessToken =
+    "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw";
+
+  // initialize mapbox instance
+  const map = new mapboxgl.Map({
+    container: "map", // HTML container id
+    style: "mapbox://styles/mapbox/streets-v9", // style URL
+    center: [latitude, longitude], // starting position as [lng, lat]
+    zoom: 13, // starting zoom level
+  });
+</script>
 <%- include("../partials/footer.ejs") %>
