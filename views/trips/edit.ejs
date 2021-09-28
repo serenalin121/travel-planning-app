@@ -18,17 +18,17 @@
         />
         <label for="name">Trip Name</label>
       </div>
-        <div class="input-field col s6">
-          <input
-            id="duration"
-            type="number"
-            class="validate"
-            min="1"
-            name="duration"
-            value="<%= +(trip.duration) %>"
-            required
-          />
-          <label for="duration">Trip Duration (day)</label>
+      <div class="input-field col s6">
+        <input
+          id="duration"
+          type="number"
+          class="validate"
+          min="1"
+          name="duration"
+          value="<%= +(trip.duration) %>"
+          required
+        />
+        <label for="duration">Trip Duration (day)</label>
       </div>
     </div>
 
@@ -64,6 +64,24 @@
     <a href="/trips/<%= trip._id %>" class="waves-effect waves-light btn"
       >Cancel<i class="material-icons right">cancel</i></a
     >
+
+    <div class="row" hidden>
+      <input
+        id="latitude"
+        type="text"
+        class="validate"
+        name="latitude"
+        value="<%= +(trip.latitude) %>"
+      />
+      <input
+        id="longitude"
+        type="text"
+        class="validate"
+        name="longitude"
+        value="<%= +(trip.longitude) %>"
+      />
+    </div>
+
     <button
       class="btn waves-effect waves-light right"
       type="submit"
@@ -76,19 +94,8 @@
 </div>
 
 <script>
-  const latitude = <%= trip.latitude %>;
-  const longitude = <%= trip.longitude %>;
-  // Set mapbox access token
-  mapboxgl.accessToken =
-    "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw";
-
-  // initialize mapbox instance
-  const map = new mapboxgl.Map({
-    container: "map", // HTML container id
-    style: "mapbox://styles/mapbox/streets-v9", // style URL
-    center: [latitude, longitude], // starting position as [lng, lat]
-    zoom: 13, // starting zoom level
-  });
+  let trip = <%-JSON.stringify(trip)%>
 </script>
-<script src="/js/autocomplete.js"></script>
+
+<script src="/js/showMap.js"></script>
 <%- include("../partials/footer.ejs") %>

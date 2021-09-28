@@ -6,8 +6,8 @@ const tripSchema = new Schema({
   name: { type: String, required: true },
   duration: { type: Number, min: 0, required: true },
   destination: { type: String, require: true },
-  latitude: Number,
-  longitude: Number,
+  latitude: {type: Number},
+  longitude: {type: Number},
   itinerary: [String],
   author: { type: Schema.Types.ObjectId, ref: "User" },
 });

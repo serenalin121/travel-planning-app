@@ -2,11 +2,19 @@
 mapboxgl.accessToken =
   "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw";
 
+let centerData = [];
+if (trip) {
+  centerData = [trip.latitude, trip.longitude];
+} else {
+  centerData = [-21.9270884, 64.1436456];
+}
+
 // initialize mapbox instance
 const map = new mapboxgl.Map({
   container: "map", // HTML container id
   style: "mapbox://styles/mapbox/streets-v9", // style URL
-  center: [-21.9270884, 64.1436456], // starting position as [lng, lat]
+  // center: [-21.9270884, 64.1436456], // starting position as [lng, lat]
+  center: centerData,
   zoom: 13, // starting zoom level
 });
 
@@ -45,14 +53,24 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Listens to user keyup event to query for place suggestions
  */
-autocompleteInput.addEventListener("keyup", (e) => {
-  fetch("autocomplete?query=" + e.target.value)
+autocompleteInput?.addEventListener("keyup", (e) => {
+  // console.log(e.target.value);
+  fetch("/trips/autocomplete?query=" + e.target.value)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+
       // Store data in autocompleteData for user's selection lookup
       autocompleteData = data.features;
 
       // Update autocomplete instance's options data
+      console.log(data.features);
+      console.log(
+        data.features.reduce(
+          (accu, curr) => ({ ...accu, [curr.place_name]: null }),
+          {}
+        )
+      );
       autocompleteInstance.updateData(
         data.features.reduce(
           (accu, curr) => ({ ...accu, [curr.place_name]: null }),
