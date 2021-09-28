@@ -58,19 +58,19 @@ autocompleteInput?.addEventListener("keyup", (e) => {
   fetch("/trips/autocomplete?query=" + e.target.value)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      // console.log(data);
 
       // Store data in autocompleteData for user's selection lookup
       autocompleteData = data.features;
 
       // Update autocomplete instance's options data
-      console.log(data.features);
-      console.log(
-        data.features.reduce(
-          (accu, curr) => ({ ...accu, [curr.place_name]: null }),
-          {}
-        )
-      );
+      // console.log(data.features);
+      // console.log(
+      //   data.features.reduce(
+      //     (accu, curr) => ({ ...accu, [curr.place_name]: null }),
+      //     {}
+      //   )
+      // );
       autocompleteInstance.updateData(
         data.features.reduce(
           (accu, curr) => ({ ...accu, [curr.place_name]: null }),
