@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const fetch = require("node-fetch");
 const Trip = require("../models/trip");
-
+const openWeatherApiKey = process.env.OPEN_WEATHER;
 const MapboxClient = require("mapbox");
 const client = new MapboxClient(
   "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw"
@@ -32,7 +33,6 @@ router.post("/", (req, res) => {
       err
         ? res.send(err)
         : (req.session.message = "Successfully created a new trip!");
-      console.log(createdTrip);
       res.redirect(`/trips/${createdTrip._id}`);
     });
   } catch (err) {
@@ -113,7 +113,23 @@ router.get("/autocomplete", (req, res) => {
 router.get("/:id", requireLogin, (req, res) => {
   try {
     Trip.findById(req.params.id, (err, foundTrip) => {
-      err ? res.send(err) : res.render("trips/show.ejs", { trip: foundTrip });
+      if (err) {
+        res.send(err);
+      } else {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${+foundTrip.latitude}&lon=${+foundTrip.longitude}&appid=${openWeatherApiKey}&units=imperial`
+        )
+          .then((res) => res.json())
+          .then((weatherData) => {
+            console.log(weatherData.main.temp);
+            res.render("trips/show.ejs", {
+              trip: foundTrip,
+              temp: weatherData.main.temp,
+            });
+          });
+        // const weatherData = await response.json();
+        // console.log(weatherData);
+      }
     });
   } catch (err) {
     res.send(err.message);

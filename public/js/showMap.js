@@ -4,7 +4,7 @@ mapboxgl.accessToken =
 
 let centerData = [];
 if (trip) {
-  centerData = [trip.latitude, trip.longitude];
+  centerData = [trip.longitude, trip.latitude];
 } else {
   centerData = [-21.9270884, 64.1436456];
 }
@@ -44,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // https://docs.mapbox.com/mapbox-gl-js/api/map/#map#setcenter
       map.setCenter(found.center);
       // [lat, lng]
-      latitudeInput.value = found.center[0];
-      longitudeInput.value = found.center[1];
+      latitudeInput.value = found.center[1];
+      longitudeInput.value = found.center[0];
     },
   });
 });
