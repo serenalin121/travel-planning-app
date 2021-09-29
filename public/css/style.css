@@ -35,9 +35,21 @@ footer {
   margin: 50px;
 }
 
-.showPageCard {
+.indexPageCard {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.indexPageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.indexPageButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .trip-flash {
