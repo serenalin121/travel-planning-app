@@ -1,37 +1,38 @@
 <%- include("../partials/header.ejs") %>
 
-<h1>All Trips</h1>
+  <h1>All Trips</h1>
 
-<% if(trips.length > 0){ %>
-<div class="indexPageCard row">
-  <% trips.forEach(trip=>{ %>
-  <div class="col s12 m6">
-    <div class="card teal darken-4">
-      <div class="card-content white-text">
-        <span class="card-title"><%= trip.name %> </span>
-        <p>
-          <%= trip.destination %> - <%= trip.duration %> <%= trip.duration ===1?
-          "Day": "Days" %>
-        </p>
-      </div>
-      <div class="card-action">
-        <a href="/trips/<%= trip.id %> ">Details</a>
-        <a href="/trips/<%= trip.id %>/edit ">Edit</a>
+  <% if(trips.length > 0){ %>
+  <div class="row">
+    <% trips.forEach(trip=>{ %>
+    <div class="col s12 m6">
+      <div class="card teal darken-4">
+        <div class="card-content white-text">
+          <span class="card-title"><%= trip.name %> </span>
+          <p>
+            <%= trip.destination %> - <%= trip.duration %> <%= trip.duration
+            ===1? "Day": "Days" %>
+          </p>
+        </div>
+        <div class="card-action">
+          <a href="/trips/<%= trip.id %> ">Details</a>
+          <a href="/trips/<%= trip.id %>/edit ">Edit</a>
+        </div>
       </div>
     </div>
+    <% }) %>
   </div>
-  <% }) %>
-</div>
-<% }else{ %>
-<div class="indexPageContainer">
-  <h3>There is no saved trip yet...</h3>
-  <div class="indexPageButton">
-    <a
-      href="/trips/new"
-      class="waves-effect waves-light btn-large indexPageButton"
-      ><i class="material-icons left">add</i>Create your first trip!</a
-    >
+  <% }else{ %>
+  <div class="indexPageContainer">
+    <h3>There is no saved trip yet...</h3>
+    <div class="indexPageButton">
+      <a
+        href="/trips/new"
+        class="waves-effect waves-light btn-large indexPageButton"
+        ><i class="material-icons left">add</i>Create your first trip!</a
+      >
+    </div>
   </div>
-</div>
+
 
 <% } %> <%- include("../partials/footer.ejs") %>

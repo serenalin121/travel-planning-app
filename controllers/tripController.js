@@ -61,53 +61,6 @@ router.get("/autocomplete", (req, res) => {
   );
 });
 
-// Seed Data
-// router.get("/seed", async (req, res) => {
-//   const newTrips = [
-//     {
-//       name: "Canada Day Trip",
-//       duration: 1,
-//       destination: "Vancouver",
-//       itinerary: [
-//         "Explore Gastown",
-//         "Lunch at Granville Island",
-//         "Take the Aquabus",
-//       ],
-//     },
-//     {
-//       name: "Tokyo, Japan",
-//       duration: 7,
-//       destination: "Tokyo",
-//       itinerary: [
-//         "Explore historic Sensoji Temple",
-//         "Tokyo Tower",
-//         "Eat the freshest sushi in town at Toyosu Fish Market",
-//         "Party all night in Shibuya",
-//       ],
-//     },
-//     {
-//       name: "The Big Apple",
-//       duration: 4,
-//       destination: "New York City",
-//       itinerary: [
-//         "Watch a Broadway show",
-//         "Visit Times Square",
-//         "Central Park",
-//         "Statue of Liberty",
-//         "Brooklyn Bridge Park",
-//       ],
-//     },
-//   ];
-
-//   try {
-//     const seedItems = await Trip.create(newTrips);
-//     res.send(seedItems);
-//   } catch (err) {
-//     console.log(err);
-//     res.send(err.message);
-//   }
-// });
-
 router.get("/:id", requireLogin, (req, res) => {
   try {
     Trip.findById(req.params.id, (err, foundTrip) => {
@@ -119,14 +72,11 @@ router.get("/:id", requireLogin, (req, res) => {
         )
           .then((res) => res.json())
           .then((weatherData) => {
-            console.log(weatherData.main.temp);
             res.render("trips/show.ejs", {
               trip: foundTrip,
               temp: weatherData.main.temp,
             });
           });
-        // const weatherData = await response.json();
-        // console.log(weatherData);
       }
     });
   } catch (err) {
