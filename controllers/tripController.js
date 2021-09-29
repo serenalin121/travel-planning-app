@@ -4,9 +4,7 @@ const fetch = require("node-fetch");
 const Trip = require("../models/trip");
 const openWeatherApiKey = process.env.OPEN_WEATHER;
 const MapboxClient = require("mapbox");
-const client = new MapboxClient(
-  "pk.eyJ1Ijoid29sbGV5c2Vzb20iLCJhIjoiY2t1MGdxamVwMWU4bTJudGgyOWsxaGg3ZSJ9.Pxl9xv4a8z9tVFIhSecDUw"
-);
+const client = new MapboxClient(process.env.MAPBOX_API_KEY);
 
 const requireLogin = (req, res, next) => {
   if (!req.session.currentUser) {
