@@ -5,10 +5,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const session = require("express-session");
-const MapboxClient = require("mapbox");
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3000;
 
 // Connect to Database
 const mongoURI = process.env.MONGODB_URI;
