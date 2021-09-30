@@ -10,11 +10,6 @@ body {
   margin: auto;
 }
 
-nav .nav-wrapper {
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
 main {
   display: flex;
   flex-direction: column;
@@ -38,4 +33,10 @@ footer {
 
 .submit-button {
   margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px){
+  nav .brand-logo{
+    font-size: 1.5rem;
+  }
 }

@@ -9,14 +9,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
     <link rel="stylesheet" href="/css/home.css" />
   </head>
   <div class="container">
   <body>
     <nav class="transparent z-depth-0">
       <div class="nav-wrapper">
-        <a href="/" class="brand-logo left"> Travel Planning</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="/" class="brand-logo">Travel Planning</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        
+        <ul class="right hide-on-med-and-down">
           <% if(typeof currentUser === "undefined"){ %>
           <li><a href="/users/signin">Sign In</a></li>
           <li><a href="/users/register">Register</a></li>
@@ -27,7 +34,21 @@
       </div>
     </nav>
 
+    <ul class="sidenav" id="mobile-demo">
+      <% if(typeof currentUser === "undefined"){ %>
+        <li><a href="/users/signin">Sign In</a></li>
+        <li><a href="/users/register">Register</a></li>
+        <% }else{ %>
+        <li><a href="/users/signout">Sign Out</a></li>
+        <% } %>
+    </ul>
+
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const elems = document.querySelectorAll(".sidenav");
+        const instances = M.Sidenav.init(elems, {});
+      });
+
       setTimeout(() => {
         const homeFlash = window.document.querySelector(".home-flash");
 

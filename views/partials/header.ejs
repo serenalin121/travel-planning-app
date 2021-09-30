@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
     <link
       href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css"
       rel="stylesheet"
@@ -26,7 +26,8 @@
         <a href="/" class="brand-logo">
           <i class="large material-icons">card_travel</i>Travel Planning</a
         >
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
           <li><a href="/trips">All Trips</a></li>
           <li><a href="/trips/new">Add New Trip </a></li>
           <li><a href="/users/signout">Sign Out </a></li>
@@ -34,7 +35,18 @@
       </div>
     </nav>
 
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="/trips">All Trips</a></li>
+      <li><a href="/trips/new">Add New Trip </a></li>
+      <li><a href="/users/signout">Sign Out </a></li>
+    </ul>
+
     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const elems = document.querySelectorAll(".sidenav");
+        const instances = M.Sidenav.init(elems, {});
+      });
+
       setTimeout(() => {
         const tripFlash = window.document.querySelector(".trip-flash");
 
@@ -50,5 +62,5 @@
     </h6>
 
     <% } %>
-    <div class="container">
+    <div class="container"></div>
 
