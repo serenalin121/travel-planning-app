@@ -22,6 +22,11 @@ nav ul a {
   font-size: large;
 }
 
+@media only screen and (max-width: 600px){
+  nav .brand-logo{
+    font-size: 1.3rem;
+  }
+}
 footer {
   text-align: center;
   position: fixed;
@@ -29,7 +34,7 @@ footer {
   bottom: 0;
   width: 100%;
 }
-
+ç
 .indexPageContainer {
   display: flex;
   flex-direction: column;

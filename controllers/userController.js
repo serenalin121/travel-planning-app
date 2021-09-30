@@ -12,7 +12,7 @@ router.post("/register", (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, salt);
   User.findOne({ username: req.body.username }, (err, userExists) => {
     if (userExists) {
-        req.session.message = "That username is takend!";
+        req.session.message = "That username is taken!";
         res.redirect("/users/signin");
     } else {
       User.create(req.body, (err, createdUser) => {
