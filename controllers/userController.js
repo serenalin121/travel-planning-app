@@ -13,7 +13,7 @@ router.post("/register", (req, res) => {
   User.findOne({ username: req.body.username }, (err, userExists) => {
     if (userExists) {
         req.session.message = "That username is taken!";
-        res.redirect("/users/signin");
+        res.redirect("/users/register");
     } else {
       User.create(req.body, (err, createdUser) => {
         req.session.currentUser = createdUser;
